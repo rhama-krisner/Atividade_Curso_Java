@@ -30,10 +30,11 @@ public class Program {
         System.out.println("Entre com os dados do pedido");
 
         //Status de pedido
-        System.out.println("PENDING_PAYMENTS,PROCESSING,SHIPPED,DELIVERED");
+        System.out.println("AGUARDANDO_PAGAMENTO,PROCESSANDO,ENVIADO,ENTREGUE");
         System.out.print("Status: ");
         String status = sc.nextLine();
         status.toUpperCase();
+        order.setStatus(status);
 
 
         //Laço para a quantidade de itens que será feito o input
@@ -51,6 +52,8 @@ public class Program {
             products.setPrice(valor);
             System.out.print("Quantidade: ");
             int quantidade = sc.nextInt();
+            products.setName(produto);
+            products.setPrice(valor);
         }
 
         //Output dos produtos
@@ -65,9 +68,9 @@ public class Program {
         System.out.println("Cliente: " + cliente);
 
         System.out.println("ITENS: ");
-
-
-
+        for (Integer i : order.getListaItens()) {
+            
+        }
     }
 
 }

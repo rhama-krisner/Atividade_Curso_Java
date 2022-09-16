@@ -1,7 +1,5 @@
 package entities;
 
-import entities.enums.OrderStatus;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +7,7 @@ import java.util.List;
 
 public class Order {
     private Date moment = new Date();
-    private OrderStatus status;
+    private String status;
 
     private double total;
 
@@ -24,7 +22,7 @@ public class Order {
         return sb.toString();
     }
 
-    public Order(Date moment, OrderStatus status, double total) {
+    public Order(Date moment, String status, double total) {
         this.moment = moment;
         this.status = status;
         this.total = total;
@@ -34,14 +32,17 @@ public class Order {
 
     }
 
-    public OrderStatus getStatus() {
+    //Getter e setter de enum
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
+
+    //Getter e ser lista
     public List<Product> getListaItens() {
         return listaItens;
     }
@@ -50,6 +51,7 @@ public class Order {
         this.listaItens = listaItens;
     }
 
+    //Adiciona e remove itens de lista
     public void addItens(Product itens){
         listaItens.add(itens);
     }
@@ -67,6 +69,5 @@ public class Order {
         double preco = order.getPrice();
         return quantidade*preco;
     }
-
 
 }
