@@ -5,69 +5,84 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import entities.enums.OrderStatus;
+
 public class Order {
-    private Date moment = new Date();
-    private String status;
 
-    private double total;
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	
+	private Date moment;
+	private OrderStatus status;
+	
+	private Client client;
+	
+	private List<OrderItem> items = new ArrayList<OrderItem>();
 
-    private List<Product> listaItens = new ArrayList<>();
+	public Order() {
+	}
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	public Order(Date moment, OrderStatus status, Client client) {
+		super();
+		this.moment = moment;
+		this.status = status;
+		this.client = client;
+	}
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(sdf.format(moment));
-        return sb.toString();
-    }
+	public Date getMoment() {
+		return moment;
+	}
 
-    public Order(Date moment, String status, double total) {
-        this.moment = moment;
-        this.status = status;
-        this.total = total;
-    }
+	public void setMoment(Date moment) {
+		this.moment = moment;
+	}
 
-    public Order(){
+	public OrderStatus getStatus() {
+		return status;
+	}
 
-    }
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
 
-    //Getter e setter de enum
-    public String getStatus() {
-        return status;
-    }
+	public Client getClient() {
+		return client;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
-
-    //Getter e ser lista
-    public List<Product> getListaItens() {
-        return listaItens;
-    }
-
-    public void setListaItens(List<Product> listaItens) {
-        this.listaItens = listaItens;
-    }
-
-    //Adiciona e remove itens de lista
-    public void addItens(Product itens){
-        listaItens.add(itens);
-    }
-    public void removeItens(Product itens){
-        listaItens.remove(itens);
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public double total(){
-        OrderItem order = new OrderItem();
-        int quantidade = order.getQuantity();
-        double preco = order.getPrice();
-        return quantidade*preco;
-    }
-
+	public void addItem(OrderItem item) {
+		items.add(item);
+	}
+	
+	public void removeItem(OrderItem item) {
+		items.remove(item);
+	}
+	
+	public double total() {
+		double sum = 0.0;
+		for (OrderItem it : items) {
+			sum += it.subTotal();
+		}
+		return sum;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Order moment: ");
+		sb.append(sdf.format(moment) + "\n");
+		sb.append("Order status: ");
+		sb.append(status + "\n");
+		sb.append("Client: ");
+		sb.append(client + "\n");
+		sb.append("Order items:\n");
+		for (OrderItem item : items) {
+			sb.append(item + "\n");
+		}
+		sb.append("Total price: $");
+		sb.append(String.format("%.2f", total()));
+		return sb.toString();
+	}	
 }

@@ -1,44 +1,58 @@
 package entities;
 
 public class OrderItem {
-    private int quantity;
-    private double price;
 
-    private double subTotal;
+	private Integer quantity;
+	private Double price;
+	
+	private Product product;
+	
+	public OrderItem() {
+	}
 
-    public OrderItem(){
+	public OrderItem(Integer quantity, Double price, Product product) {
+		super();
+		this.quantity = quantity;
+		this.price = price;
+		this.product = product;
+	}
 
-    }
+	public Integer getQuantity() {
+		return quantity;
+	}
 
-    public OrderItem(int quantity, double price) {
-        this.quantity = quantity;
-        this.price = price;
-    }
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 
-    public double subTotal(){
-        return getQuantity()*getPrice();
-    }
+	public Double getPrice() {
+		return price;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public Product getProduct() {
+		return product;
+	}
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Total: " + subTotal + "\n");
-        return sb.toString();
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+	public double subTotal() {
+		return price * quantity;
+	}	
+	
+	@Override
+	public String toString() {
+		return getProduct().getName()
+				+ ", $"
+				+ String.format("%.2f", price)
+				+ ", Quantity: "
+				+ quantity
+				+ ", Subtotal: $"
+				+ String.format("%.2f", subTotal());
+	}
 }

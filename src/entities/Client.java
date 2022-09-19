@@ -4,55 +4,49 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Client {
-        private String name;
-        private String email;
-        private Date data;
 
-    public Client(String name, String email, Date data) {
-        this.name = name;
-        this.email = email;
-        this.data = data;
-    }
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
+	private String name;
+	private String email;
+	private Date birthDate;
+	
+	public Client() {
+	}
 
-    public Client(){
+	public Client(String name, String email, Date birthDate) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.birthDate = birthDate;
+	}
 
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public Date getBirthDate() {
+		return birthDate;
+	}
 
-    //Primeiro instancia o Simple date format, com o formato de data que deseja
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(name + " ");
-        //Depois chama o Simple Date Format, passa o atributo format para mudar o formato da data
-        //Depois passa a variável que está recebendo a data
-        sb.append("(" + sdf.format(data) + ") ");
-        sb.append(email + " ");
-        return sb.toString();
-    }
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+	
+	@Override
+	public String toString() {
+		return name + " (" + sdf.format(birthDate) + ") - " + email;
+ 	}
 }
